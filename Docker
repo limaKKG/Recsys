@@ -1,0 +1,12 @@
+# Используем базовый образ с Python и предустановленным Apache Airflow
+FROM apache/airflow:2.1.2
+
+# Установим дополнительные зависимости, необходимые для выполнения DAG'ов
+USER root
+RUN pip install psycopg2-binary
+
+# Перейдем к пользователю airflow (по умолчанию)
+USER airflow
+
+# Копируем ваши DAG'и в каталог с DAG'ами Airflow
+COPY /home/kamilg/dags /opt/airflow/dags/
